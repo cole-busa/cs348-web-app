@@ -1,0 +1,73 @@
+<head>
+    <title>Library Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<form method="GET" action="{% url 'generate_report' %}">
+    <label for="genres">Select Genres:</label>
+    <br>
+    <select name="genre" id="genres" multiple>
+        {% for genre in genres %}
+        <option value="{{ genre }}" {% if genre in selected_genres %} selected {% endif %}>{{ genre }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <br>
+    <label for="authors">Select Authors:</label>
+    <br>
+    <select name="author" id="authors" multiple>
+        {% for author in authors %}
+        <option value="{{ author }}" {% if author in selected_authors %} selected {% endif %}>{{ author }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <button type="submit">Generate Report</button>
+</form>
+
+
+{% if books %}
+    <h2>Filtered Books</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.genre }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No books found.</p>
+{% endif %}
+
+<a href="/">Return Home</a>

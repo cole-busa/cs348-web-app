@@ -21,10 +21,10 @@
         }
     </style>
 </head>
-<h1>Confirm Delete Book</h1>
-<p>Are you sure you want to delete "{{ book.title }}"? This action cannot be undone.</p>
+<h1>Edit Member</h1>
 <form method="POST">  
     {% csrf_token %}  
-    <button type="submit">Delete</button>
-    <a href="/">Cancel</a>
+    {{ form }}
+    <button type="submit" name="save">Save Edits</button>
 </form>
+<a href="/">Cancel</a>
