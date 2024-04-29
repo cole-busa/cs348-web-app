@@ -12,7 +12,7 @@ class Book(models.Model):
         return self.title
     
     class Meta:
-        indexes = (HashIndex(fields=('isbn', 'title')),)
+        indexes = (HashIndex(fields=('isbn',)),)
 
 class Member(models.Model):
     name = models.CharField(max_length=255)
@@ -22,7 +22,7 @@ class Member(models.Model):
         return self.name
     
     class Meta:
-        indexes = (HashIndex(fields=('name', 'contact_info')),)
+        indexes = (HashIndex(fields=('contact_info',)),)
 
 class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
